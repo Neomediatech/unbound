@@ -2,6 +2,7 @@ FROM alpine
 CMD ["/bin/sh"]
 RUN apk add --no-cache unbound openssl && rm -f /etc/unbound/unbound.conf
 COPY entrypoint.sh /usr/local/bin
+COPY unbound.conf /etc/unbound
 WORKDIR /etc/unbound
 ENTRYPOINT ["entrypoint.sh"]
 
