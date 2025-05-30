@@ -1,14 +1,18 @@
 FROM alpine
 
 ENV TZ=Europe/Rome \
-    OS=alpine
+    OS=alpine \
+    SERVICE=unbound
 
 LABEL maintainer="https://github.com/Neomediatech" \ 
       org.label-schema.vcs-type=Git \
-      org.label-schema.vcs-url=https://github.com/Neomediatech/${REPO} \
+      org.label-schema.vcs-url=https://github.com/Neomediatech/${SERVICE} \
       org.label-schema.maintainer=Neomediatech
 
-RUN apk add --no-cache unbound openssl && rm -f /etc/unbound/unbound.conf
+RUN apk add --no-cache unbound openssl tzdata && \
+    rm -f /etc/unbound/unbound.conf && \
+    ln -s /usr/share/zoneinfo/$TZ /etc/localtime
+
 COPY entrypoint.sh /usr/local/bin
 COPY unbound.conf /etc/unbound
 WORKDIR /etc/unbound
