@@ -6,7 +6,11 @@ on:
       - 'Dockerfile'
       - 'entrypoint.sh'
       - 'unbound.conf'
-  #pull_request:
+  pull_request:
+    paths:
+      - 'Dockerfile'
+      - 'entrypoint.sh'
+      - 'unbound.conf'
   workflow_dispatch: # Permette di avviare il workflow manualmente dalla UI di GitHub
     inputs:
       versions_to_build:
