@@ -1,0 +1,12 @@
+name: unbound
+
+services:
+  dns:
+    image: ghcr.io/neomediatech/unbound:latest
+    hostname: app
+    environment:
+      TZ: Europe/Rome
+    ports:
+      - 53:53/tcp
+      - 53/53/udp
+
